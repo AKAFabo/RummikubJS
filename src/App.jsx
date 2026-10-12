@@ -13,14 +13,21 @@ function App() {
 
   const [tiles, setTiles] = useState([]);
 
+  const COLORS = ["red", "blue", "black", "orange"];
+
   function addTile() {
+    const newTiles = [];
 
-    const tiles = [];
-
-    for (let i = 1; i <= 14; i++) {
-      tiles.push(new Tile(tiles.length + 1, i, 'red'));
+    for (const color of COLORS) {
+      for (let value = 1; value <= 13; value++) {
+        newTiles.push(new Tile(newTiles.length + 1, value, color));
+      }
     }
-    setTiles(tiles);
+
+    newTiles.push(new Tile(newTiles.length + 1, 14, "red")); 
+      newTiles.push(new Tile(newTiles.length + 1, 14, "black"));   //Wildcards
+
+    setTiles(newTiles);
   }
 
   return (
