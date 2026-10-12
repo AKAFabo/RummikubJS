@@ -3,31 +3,51 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
+import Tile from './components/Tile/Tile.jsx'
+
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const tileTest = new Tile(1, 1, 'red');
+
+  const [tiles, setTiles] = useState([]);
+
+  function addTile() {
+
+    const tiles = [];
+
+    for (let i = 1; i <= 14; i++) {
+      tiles.push(new Tile(tiles.length + 1, i, 'red'));
+    }
+    setTiles(tiles);
+  }
+
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
         <div>
-          <h1>Get started</h1>
+          <h1>Rummikub</h1>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            Press the button to initialize tiles (In progress)
           </p>
         </div>
         <button
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="tileMaker"
+          onClick={addTile}
         >
-          Count is {count}
+          Initialize Tiles
         </button>
+        <p>Tiles created: {tiles.length}</p>
+        <div className="tile-container"> 
+          {/* iterates over the full array*/}
+          {tiles.map((tile) => (
+            <div key={tile.id} className="tile" style={{ backgroundColor: tile.color }}>
+              {tile.value}
+            </div>
+          ))}
+        </div>
       </section>
 
       <div className="ticks"></div>
@@ -54,68 +74,17 @@ function App() {
             </li>
           </ul>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
       </section>
 
       <div className="ticks"></div>
       <section id="spacer"></section>
+
+
+      Hola en donde sale esto {tileTest.getTileInfo().value} y el color es {tileTest.getTileInfo().color}
     </>
+
+    
+
   )
 }
 
